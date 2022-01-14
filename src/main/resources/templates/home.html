@@ -9,6 +9,10 @@
 </head>
 <body>
 <h1 th:text="${welcomeMessage}">Hello home page ...</h1>
-<h1 th:each="msg : ${greetings}" th:text="${msg}">Hello home page ...</h1>
+<h1 th:each="msg : ${greetings}"
+    th:text="${msg}"
+    th:unless="${msg.contains('Caldeira'}">
+    Hello home page ...
+</h1>
 </body>
 </html>

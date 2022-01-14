@@ -33,6 +33,7 @@
 ##### Tags
 |Tag|Example|
 |---|-------|
-|th:text|```<h1 th:text="${welcomeMessage}">Hello home page ...</h1>```|
-|th:each|```<h1 th:each="msg : ${greetings}" th:text="${msg}">Hello home page ...</h1>```|
+|th:text|```<h1 th:text="${welcomeMessage}">Any text here.</h1>```|
+|th:each|```<h1 th:each="msg : ${greetings}" th:text="${msg}">Any text here.</h1>```|
+|th:unless|```th:unless="${msg.contains('AnyValue'}"```|
 ---
