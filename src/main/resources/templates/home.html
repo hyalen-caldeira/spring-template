@@ -8,11 +8,13 @@
     <title>Home</title>
 </head>
 <body>
-<h1 th:text="${welcomeMessage}">Hello home page ...</h1>
-<h1 th:each="msg : ${greetings}"
-    th:text="${msg}"
-    th:unless="${msg.contains('Caldeira'}">
-    Hello home page ...
-</h1>
+    <form action="#" th:object="${newMessage}" method="POST" th:action="@{'/home'}">
+        <label for="newMessageText">Submit a new message: </label>
+        <input type="text" id="newMessageText" name="newMessageText" th:field="*{text}">
+        <input type="submit">
+    </form>
+    <h1 th:each="msg : ${greetings}" th:text="${msg}" th:unless="${msg.contains('Goodbye')}">
+        Hello, homepage!
+    </h1>
 </body>
 </html>

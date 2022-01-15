@@ -7,6 +7,7 @@
   * Spring Security
   * H2 Database
   * MyBatis Framework
+  * Spring Data JPA
 ---
 ### Keywords
 * Ioc
@@ -30,10 +31,31 @@
 * **_@Qualifier_**
 ---
 ### Thymeleaf
+* Further Reading
+  * [The official Thymeleaf tutorial](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#introducing-thymeleaf), which explains the entire framework from first principles.
+  * [The official Thymeleaf expression syntax tutorial](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#standard-expression-syntax) - Read this section if all those ${}s aren't making much sense to you.
+  * [The official Spring Expression Language docs](https://docs.spring.io/spring-framework/docs/4.3.10.RELEASE/spring-framework-reference/html/expressions.html) - This will tell you how to perform various computations inside of the Thymeleaf expression brackets
+---
 ##### Tags
 |Tag|Example|
 |---|-------|
 |th:text|```<h1 th:text="${welcomeMessage}">Any text here.</h1>```|
 |th:each|```<h1 th:each="msg : ${greetings}" th:text="${msg}">Any text here.</h1>```|
+|th:if|```<h1 th:if="${anyCondition}">Hello first time ...</h1>```|
 |th:unless|```th:unless="${msg.contains('AnyValue'}"```|
+---
+### Selenium
+* Selenium tips here ...
+---
+### Postman
+* Postman tips here ...
+---
+### Unit & Integration Test
+* Test tips here ...
+---
+### Mapper
+* Mapper tips here ...
+---
+### Swagger
+* Swagger tips here ...
 ---
