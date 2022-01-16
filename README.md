@@ -30,6 +30,18 @@
 * **_@Primary_**
 * **_@Qualifier_**
 ---
+### REST Development
+* Creation Order
+1. Entity
+2. Repository
+3. Service
+4. Controller
+
+* Pagination
+---
+### H2 Database
+* domain:port/h2/
+---
 ### Thymeleaf
 * Further Reading
   * [The official Thymeleaf tutorial](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#introducing-thymeleaf), which explains the entire framework from first principles.
@@ -59,3 +71,5 @@
 ### Swagger
 * Swagger tips here ...
 ---
+### JPA - Hibernate
+* Hibernate tips here ...

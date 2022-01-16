@@ -29,19 +29,19 @@ public class CompanyEntity extends DateAudit {
     @Column (name = "NAME")
     private String name;
 
-    @Column (name = "ADDRESS")
-    @Size(max = 40)
-    private String address;
-
-    @Column (name = "CITY")
-    @Size(max = 40)
-    private String city;
-
-    @Column (name = "STATE")
-    @Size(max = 20)
-    private String state;
-
-    @Column (name = "PHONE")
-    @Size(max = 12)
-    private String phone;
+//    @Column (name = "ADDRESS")
+//    @Size(max = 40)
+//    private String address;
+//
+//    @Column (name = "CITY")
+//    @Size(max = 40)
+//    private String city;
+//
+//    @Column (name = "STATE")
+//    @Size(max = 20)
+//    private String state;
+//
+//    @Column (name = "PHONE")
+//    @Size(max = 12)
+//    private String phone;
 }
