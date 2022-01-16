@@ -15,8 +15,8 @@ import javax.validation.constraints.Size;
 @Table(name = "USER",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"USERNAME"}),
-                @UniqueConstraint(columnNames = {"EMAIL"})},
-        schema = "PORTFOLIO_DB")
+                @UniqueConstraint(columnNames = {"EMAIL"})}
+)
 @Setter
 @Getter
 @NoArgsConstructor
