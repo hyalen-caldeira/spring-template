@@ -1,31 +1,35 @@
 package us.hyalen.springtemplate.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.Instant;
 
 @Getter
 @Setter
 public class CompanyDto {
     public static final String MEDIA_TYPE = "api/vnd.spring-template.company.v1+json";
 
-    public Long id;
+    @JsonProperty("id")
+    private Long id;
+
     @NotBlank
     @Size(max = 40)
-    public String name;
+    @JsonProperty("name")
+    private String name;
+
     @Size(max = 40)
-    public String address;
+    @JsonProperty("address")
+    private String address;
+
     @NotBlank
-    @Size(max = 40)
     @Email
-    public String email;
+    @Size(max = 40)
+    @JsonProperty("email")
+    private String email;
 //    @CreatedDate
 //    @Column(nullable = false, updatable = false)
 //    public Instant CREATED_AT;

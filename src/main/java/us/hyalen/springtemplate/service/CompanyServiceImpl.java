@@ -14,9 +14,7 @@ import java.util.Optional;
 public class CompanyServiceImpl implements CompanyService {
     @Autowired
     CompanyDao companyDao;
-    @Autowired
-    CompanyMapper companyMapper;
-//    CompanyMapper companyMapper = CompanyMapper.INSTANCE;
+    CompanyMapper companyMapper = CompanyMapper.INSTANCE;
 
     @Override
     public List<CompanyModel> getAllCompanies() {
