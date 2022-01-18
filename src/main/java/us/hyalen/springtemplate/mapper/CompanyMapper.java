@@ -10,6 +10,6 @@ import us.hyalen.springtemplate.model.CompanyModel;
 public interface CompanyMapper {
     CompanyMapper INSTANCE = Mappers.getMapper(CompanyMapper.class);
 
-    // ====================== Domain to Model
-    CompanyDto mapModelToDto(CompanyModel company, @MappingTarget CompanyDto dto);
+    // ====================== Model to Dto
+    CompanyDto mapModelToDto(CompanyModel company);
 }

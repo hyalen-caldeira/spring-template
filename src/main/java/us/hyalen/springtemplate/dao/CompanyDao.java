@@ -1,18 +1,28 @@
 package us.hyalen.springtemplate.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import us.hyalen.springtemplate.model.CompanyModel;
 import us.hyalen.springtemplate.repository.CompanyRepository;
 
+import java.util.List;
 import java.util.Optional;
 
+@Component("companyDao_v1")
+@Transactional
 public class CompanyDao {
     @Autowired
     CompanyRepository repository;
 
     public Optional<CompanyModel> findByName(String name) {
-        Optional<CompanyModel> entity = repository.findByName(name);
-        return entity;
+        Optional<CompanyModel> model = repository.findByName(name);
+
+        return model;
+    }
+
+    public List<CompanyModel> findAll() {
+        return repository.findAll();
     }
 
     public boolean existsByName(String name) {
