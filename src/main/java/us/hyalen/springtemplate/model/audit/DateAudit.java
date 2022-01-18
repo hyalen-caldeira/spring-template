@@ -1,4 +1,4 @@
-package us.hyalen.springtemplate.entity.audit;
+package us.hyalen.springtemplate.model.audit;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

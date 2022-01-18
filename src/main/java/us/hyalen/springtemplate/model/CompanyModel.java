@@ -1,23 +1,28 @@
-package us.hyalen.springtemplate.entity;
+package us.hyalen.springtemplate.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import us.hyalen.springtemplate.entity.audit.DateAudit;
+import org.hibernate.annotations.NaturalId;
+import us.hyalen.springtemplate.model.audit.DateAudit;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(
-        name = "COMPANY",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"NAME"})}
+        name = "TBL_COMPANY"
+        ,uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"NAME"})
+        }
+        ,schema = "PORTFOLIO_DB"
 )
 @Getter
 @Setter
 @NoArgsConstructor
-public class CompanyEntity extends DateAudit {
+public class CompanyModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID")
@@ -28,9 +33,9 @@ public class CompanyEntity extends DateAudit {
     @Column (name = "NAME")
     private String name;
 
-//    @Column (name = "ADDRESS")
-//    @Size(max = 40)
-//    private String address;
+    @Column (name = "ADDRESS")
+    @Size(max = 40)
+    private String address;
 //
 //    @Column (name = "CITY")
 //    @Size(max = 40)
@@ -43,4 +48,11 @@ public class CompanyEntity extends DateAudit {
 //    @Column (name = "PHONE")
 //    @Size(max = 12)
 //    private String phone;
+
+    @NaturalId
+    @NotBlank
+    @Size(max = 40)
+    @Email
+    @Column(name = "EMAIL")
+    private String email;
 }

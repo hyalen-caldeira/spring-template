@@ -31,16 +31,24 @@
 * **_@Qualifier_**
 ---
 ### REST Development
-* Creation Order
-1. Entity
-2. Repository
-3. Service
-4. Controller
+##### Creating Order
+1. Entity - Class
+   1. data.sql
+   2. schema.sql
+2. Resource - Class
+3. Repository - Interface
+4. Dao
+5. Mapper - Interface
+6. Service
+   1. Interface
+   2. Implementation
+7. Controller
 
 * Pagination
+* Profile
 ---
 ### H2 Database
-* domain:port/h2/
+* host:port/h2/
 ---
 ### Thymeleaf
 * Further Reading

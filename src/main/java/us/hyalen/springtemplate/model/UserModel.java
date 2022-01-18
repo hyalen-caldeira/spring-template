@@ -1,10 +1,10 @@
-package us.hyalen.springtemplate.entity;
+package us.hyalen.springtemplate.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
-import us.hyalen.springtemplate.entity.audit.DateAudit;
+import us.hyalen.springtemplate.model.audit.DateAudit;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,15 +12,18 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "USER",
+@Table(
+        name = "TBL_USER",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"USERNAME"}),
-                @UniqueConstraint(columnNames = {"EMAIL"})}
+                @UniqueConstraint(columnNames = {"USERNAME"})
+                ,@UniqueConstraint(columnNames = {"EMAIL"})
+        }
+        ,schema = "PORTFOLIO_DB"
 )
 @Setter
 @Getter
 @NoArgsConstructor
-public class UserEntity extends DateAudit {
+public class UserModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
