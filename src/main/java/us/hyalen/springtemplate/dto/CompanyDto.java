@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 public class CompanyDto {
-    public static final String MEDIA_TYPE = "api/vnd.spring-template.company.v1+json";
+    public static final String MEDIA_TYPE = "application/vnd.spring-template.company.v1+json";
 
     @JsonProperty("id")
     private Long id;
