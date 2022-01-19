@@ -3,7 +3,7 @@ package us.hyalen.springtemplate.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
+@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Any message here ...")
 public class NotFoundException extends RuntimeException {
     public NotFoundException() {
         super();

@@ -1,5 +1,9 @@
 # spring-template
 
+### Questions
+* Where to launch exception in case something goes wrong? Controller, service, DAO, ...?
+* Take a look on 2.11 as example to see how o use @Query annotation on Repositories
+
 ### Dependencies
   * Spring Web
   * Thymeleaf
@@ -8,6 +12,9 @@
   * H2 Database
   * MyBatis Framework
   * Spring Data JPA
+  * MapStruct
+    * Observe that, if you are using Lombok, annotationProcessorPaths must be properly configured on pom.xml
+  * Lombok
 ---
 ### Keywords
 * Ioc
@@ -35,10 +42,10 @@
 1. Entity - Class
    1. data.sql
    2. schema.sql
-2. Resource - Class
-3. Repository - Interface
-4. Dao
-5. Mapper - Interface
+2. DTO - Class
+3. Mapper - Interface
+4. Repository - Interface
+5. DAO
 6. Service
    1. Interface
    2. Implementation
@@ -81,3 +88,10 @@
 ---
 ### JPA - Hibernate
 * Hibernate tips here ...
+---
+### MapStruct
+* Mapper tips here ...
+---
+### GraphQL
+* GraphQL tips here ...
+---
