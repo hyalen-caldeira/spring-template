@@ -1,17 +1,18 @@
-package us.hyalen.springtemplate.service;
+package us.hyalen.springtemplate.core.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import us.hyalen.springtemplate.dao.CompanyDao;
-import us.hyalen.springtemplate.dto.CompanyDto;
-import us.hyalen.springtemplate.mapper.CompanyMapper;
+import us.hyalen.springtemplate.core.Domain;
+import us.hyalen.springtemplate.core.dao.CompanyDao;
+import us.hyalen.springtemplate.core.dto.CompanyDto;
+import us.hyalen.springtemplate.core.mapper.CompanyMapper;
 import us.hyalen.springtemplate.model.CompanyModel;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CompanyServiceImpl implements CompanyService {
+public class CompanyServiceImpl extends Domain implements CompanyService {
     @Autowired
     CompanyDao dao;
 
@@ -29,6 +30,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void update(CompanyDto dto) {
+        validate();
         dao.update(CompanyMapper.INSTANCE.mapDtoToModel(dto));
     }
 }

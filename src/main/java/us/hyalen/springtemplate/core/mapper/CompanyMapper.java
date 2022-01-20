@@ -1,10 +1,8 @@
-package us.hyalen.springtemplate.mapper;
+package us.hyalen.springtemplate.core.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
-import us.hyalen.springtemplate.dto.CompanyDto;
+import us.hyalen.springtemplate.core.dto.CompanyDto;
 import us.hyalen.springtemplate.model.CompanyModel;
 
 @Mapper(componentModel = "spring")

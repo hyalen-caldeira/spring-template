@@ -1,4 +1,4 @@
-package us.hyalen.springtemplate.dto;
+package us.hyalen.springtemplate.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

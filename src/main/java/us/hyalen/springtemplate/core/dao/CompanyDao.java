@@ -1,4 +1,4 @@
-package us.hyalen.springtemplate.dao;
+package us.hyalen.springtemplate.core.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

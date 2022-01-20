@@ -1,20 +1,42 @@
 # spring-template
 
-### Questions
+### TODO
 * Where to launch exception in case something goes wrong? Controller, service, DAO, ...?
 * Take a look on 2.11 as example to see how o use @Query annotation on Repositories
+* Swagger bean validation
+* Messages returned by controller's methods
+* Validate - CompanyServiceImpl
 
 ### Dependencies
-  * Spring Web
-  * Thymeleaf
-  * Spring Boot DevTools
-  * Spring Security
-  * H2 Database
-  * MyBatis Framework
-  * Spring Data JPA
+* Spring Web
+* Thymeleaf
+* Spring Boot DevTools
+* Spring Security
+* H2 Database
+* MyBatis Framework
+* Spring Data JPA
+* Others:
   * MapStruct
     * Observe that, if you are using Lombok, annotationProcessorPaths must be properly configured on pom.xml
   * Lombok
+  * Swagger - springfox (springfox-boot-starter)
+  * commons-lang3
+---
+### Directory Structures
+* config
+* core
+  * Packages
+    * dao
+    * dto
+    * mapper
+    * service
+    * web
+  * ApiResponse
+  * Domain
+  * InvalidFieldException
+  * NotFoundException
+  * ValidationError
+
 ---
 ### Keywords
 * Ioc
@@ -80,17 +102,19 @@
 ### Unit & Integration Test
 * Test tips here ...
 ---
-### Mapper
-* Mapper tips here ...
+### Mapper - MapStruct
+* pom.xml (annotationProcessorPaths) must be properly configured. Lombok may cause issues in case not well configured
 ---
 ### Swagger
-* Swagger tips here ...
+* Create a class SwaggerConfig.java
+  * Set "useDefaultResponseMessages" to false in case you want to customize response messages
+  * Set the required custom message in the controllers
+* application.properties - include the following set
+  * spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+* http://localhost:8080/swagger-ui or http://localhost:8080/swagger-ui/index.html
 ---
 ### JPA - Hibernate
 * Hibernate tips here ...
----
-### MapStruct
-* Mapper tips here ...
 ---
 ### GraphQL
 * GraphQL tips here ...

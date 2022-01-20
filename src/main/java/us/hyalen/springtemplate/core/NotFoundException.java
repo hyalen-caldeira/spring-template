@@ -1,4 +1,4 @@
-package us.hyalen.springtemplate.exception;
+package us.hyalen.springtemplate.core;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -1,7 +1,7 @@
-package us.hyalen.springtemplate.service;
+package us.hyalen.springtemplate.core.service;
 
 import org.springframework.stereotype.Service;
-import us.hyalen.springtemplate.dto.CompanyDto;
+import us.hyalen.springtemplate.core.dto.CompanyDto;
 import us.hyalen.springtemplate.model.CompanyModel;
 
 import java.util.List;
