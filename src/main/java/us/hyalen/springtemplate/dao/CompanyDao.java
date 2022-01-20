@@ -15,14 +15,18 @@ public class CompanyDao {
     @Autowired
     CompanyRepository repository;
 
+    public List<CompanyModel> findAll() {
+        return repository.findAll();
+    }
+
     public Optional<CompanyModel> findByName(String name) {
         Optional<CompanyModel> model = repository.findByName(name);
 
         return model;
     }
 
-    public List<CompanyModel> findAll() {
-        return repository.findAll();
+    public void update(CompanyModel model) {
+        repository.save(model);
     }
 
     public boolean existsByName(String name) {
@@ -52,10 +56,6 @@ public class CompanyDao {
 //    public User create(UserModel model) {
 //        getSessionFactory().getCurrentSession().save(model);
 //        return new User.Builder().withUserModel(model).build();
-//    }
-//
-//    public void update(UserModel model) {
-//        getSessionFactory().getCurrentSession().merge(model);
 //    }
 //
 //    public void delete(UserModel model) {

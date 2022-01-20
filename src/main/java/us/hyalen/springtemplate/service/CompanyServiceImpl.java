@@ -13,17 +13,22 @@ import java.util.Optional;
 @Service
 public class CompanyServiceImpl implements CompanyService {
     @Autowired
-    CompanyDao companyDao;
+    CompanyDao dao;
 
     @Override
     public List<CompanyModel> getAllCompanies() {
-        return (List<CompanyModel>) companyDao.findAll();
+        return (List<CompanyModel>) dao.findAll();
     }
 
     @Override
     public Optional<CompanyDto> findByName(String name) {
-        var model = companyDao.findByName(name);
+        var model = dao.findByName(name);
 
         return Optional.ofNullable(model.isEmpty() ? null : CompanyMapper.INSTANCE.mapModelToDto(model.get()));
+    }
+
+    @Override
+    public void update(CompanyDto dto) {
+        dao.update(CompanyMapper.INSTANCE.mapDtoToModel(dto));
     }
 }

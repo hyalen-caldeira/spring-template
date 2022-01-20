@@ -11,6 +11,9 @@ import us.hyalen.springtemplate.model.CompanyModel;
 public interface CompanyMapper {
     CompanyMapper INSTANCE = Mappers.getMapper(CompanyMapper.class);
 
-    // ====================== Model to Dto
-    CompanyDto mapModelToDto(CompanyModel company);
+    // ====================== Model to DTO
+    CompanyDto mapModelToDto(CompanyModel model);
+
+    // DTO to Model
+    CompanyModel mapDtoToModel(CompanyDto dto);
 }

@@ -2,15 +2,13 @@ package us.hyalen.springtemplate.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import us.hyalen.springtemplate.dto.CompanyDto;
 import us.hyalen.springtemplate.exception.NotFoundException;
 import us.hyalen.springtemplate.model.CompanyModel;
 import us.hyalen.springtemplate.service.CompanyService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
@@ -27,6 +25,7 @@ public class CompanyController {
     @GetMapping
     public ResponseEntity<List<CompanyModel>> getAllCompanies() {
         var list = service.getAllCompanies();
+        
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -37,5 +36,9 @@ public class CompanyController {
         return ok(companyDto);
     }
 
-
+    @PutMapping(value = "/{name}", consumes = CompanyDto.MEDIA_TYPE)
+    public void update(@Valid @RequestBody CompanyDto dto, @PathVariable(value = "name") String name) {
+        service.findByName(name).orElseThrow(NotFoundException::new);
+        service.update(dto);
+    }
 }
