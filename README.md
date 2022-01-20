@@ -1,13 +1,42 @@
 # spring-template
 
+### TODO
+* Where to launch exception in case something goes wrong? Controller, service, DAO, ...?
+* Take a look on 2.11 as example to see how o use @Query annotation on Repositories
+* Swagger bean validation
+* Messages returned by controller's methods
+* Validate - CompanyServiceImpl
+
 ### Dependencies
-  * Spring Web
-  * Thymeleaf
-  * Spring Boot DevTools
-  * Spring Security
-  * H2 Database
-  * MyBatis Framework
-  * Spring Data JPA
+* Spring Web
+* Thymeleaf
+* Spring Boot DevTools
+* Spring Security
+* H2 Database
+* MyBatis Framework
+* Spring Data JPA
+* Others:
+  * MapStruct
+    * Observe that, if you are using Lombok, annotationProcessorPaths must be properly configured on pom.xml
+  * Lombok
+  * Swagger - springfox (springfox-boot-starter)
+  * commons-lang3
+---
+### Directory Structures
+* config
+* core
+  * Packages
+    * dao
+    * dto
+    * mapper
+    * service
+    * web
+  * ApiResponse
+  * Domain
+  * InvalidFieldException
+  * NotFoundException
+  * ValidationError
+
 ---
 ### Keywords
 * Ioc
@@ -35,10 +64,10 @@
 1. Entity - Class
    1. data.sql
    2. schema.sql
-2. Resource - Class
-3. Repository - Interface
-4. Dao
-5. Mapper - Interface
+2. DTO - Class
+3. Mapper - Interface
+4. Repository - Interface
+5. DAO
 6. Service
    1. Interface
    2. Implementation
@@ -73,11 +102,20 @@
 ### Unit & Integration Test
 * Test tips here ...
 ---
-### Mapper
-* Mapper tips here ...
+### Mapper - MapStruct
+* pom.xml (annotationProcessorPaths) must be properly configured. Lombok may cause issues in case not well configured
 ---
 ### Swagger
-* Swagger tips here ...
+* Create a class SwaggerConfig.java
+  * Set "useDefaultResponseMessages" to false in case you want to customize response messages
+  * Set the required custom message in the controllers
+* application.properties - include the following set
+  * spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+* http://localhost:8080/swagger-ui or http://localhost:8080/swagger-ui/index.html
 ---
 ### JPA - Hibernate
 * Hibernate tips here ...
+---
+### GraphQL
+* GraphQL tips here ...
+---

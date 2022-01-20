@@ -1,4 +1,4 @@
-package us.hyalen.springtemplate.web;
+package us.hyalen.springtemplate.core.web;
 
 //@Controller
 public class ThymeLeafExampleController {

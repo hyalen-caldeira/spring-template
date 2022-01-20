@@ -25,12 +25,12 @@ import javax.validation.constraints.Size;
 public class CompanyModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="ID")
+    @Column(name="ID", unique = true, nullable = false)
     private long id;
 
     @NotBlank
     @Size(max = 40)
-    @Column (name = "NAME")
+    @Column (name = "NAME", nullable = false)
     private String name;
 
     @Column (name = "ADDRESS")
@@ -53,6 +53,6 @@ public class CompanyModel extends DateAudit {
     @NotBlank
     @Size(max = 40)
     @Email
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true, nullable = false)
     private String email;
 }
