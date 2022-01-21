@@ -17,6 +17,7 @@ import static org.springframework.http.ResponseEntity.ok;
 
 @RestController("companyController_v1")
 @RequestMapping(value = "/api/companies", produces = CompanyDto.MEDIA_TYPE)
+// The following annotation could also be configured on SwaggerConfig.java
 @ApiResponses(value = {
         @ApiResponse(code=400, message = "This is a bad request, please follow the API documentation for the proper request format."),
         @ApiResponse(code=401, message = "Due to security constraints, your access request cannot be authorized."),

@@ -1,0 +1,2 @@
+INSERT INTO PORTFOLIO_DB.TBL_COMPANY (ID, NAME, ADDRESS, EMAIL, CREATED_AT, UPDATED_AT) VALUES (1, 'Conversant', 'Main Street', 'conversant@example.com', '2022-01-01', '2022-01-01');
+INSERT INTO PORTFOLIO_DB.TBL_COMPANY (ID, NAME, ADDRESS, EMAIL, CREATED_AT, UPDATED_AT) VALUES (2, 'Accenture', 'Club Lane Dr', 'accenture@example.com', '2022-01-01', '2022-01-01');

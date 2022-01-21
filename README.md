@@ -6,6 +6,17 @@
 * Swagger bean validation
 * Messages returned by controller's methods
 * Validate - CompanyServiceImpl
+  * Test validate
+* Implement profile
+* Logs
+* How to make testing to ignore swagger?
+* config
+  * domain
+    * All DAOs
+  * AuditConfig
+  * DataConfig
+  * SecurityConfig
+  * WebMvcConfig
 
 ### Dependencies
 * Spring Web
@@ -36,7 +47,13 @@
   * InvalidFieldException
   * NotFoundException
   * ValidationError
-
+---
+### Active Profiles
+* In order to set up which profile (Production, Development, Test, etc) should be considered, each application should set up the environment variable SPRING_PROFILES_ACTIVE. If there are more than one profile it should be separated by comma
+  * Example: $ export SPRING_PROFILES_ACTIVE=QA, Development
+  * The environment variable could obviously be created through of any shell script startup file
+* The profiles can also be informed by command line
+  * Example: $ java -jar -Dspring.profiles.active=production name_of_application.jar
 ---
 ### Keywords
 * Ioc
@@ -58,6 +75,15 @@
       * **_@Repository_**
 * **_@Primary_**
 * **_@Qualifier_**
+##### **Unit & Integration Test**
+* **_@WebMvcTest_** - used for Unit Test
+  * Is used for controller layer unit testing. Scans only for the controllers (@Controller, @RestController, ...)
+* **_@MockBean_**
+  * The beans (Services, Repositories, etc) are not auto-created. You must mock them
+  * Autowired MockMvc to simulate http request
+* **_SpringBootTest_** - user for Integration Test
+  * The **_@SpringBootTest_** annotation is useful for integration testing and is chosen over @WebMvcTest because **_@SpringBootTest_** starts the full application context (including the server) and does not customize component scanning at all. 
+  * **_@SpringBootTest_** will look for the main configuration class, annotated with@SpringBootTest and use that to start a Spring application context that simulates a calling client.
 ---
 ### REST Development
 ##### Creating Order
