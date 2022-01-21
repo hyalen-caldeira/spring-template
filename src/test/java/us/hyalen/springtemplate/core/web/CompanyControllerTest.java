@@ -47,7 +47,7 @@ class CompanyControllerTest extends Core {
 
         // WHEN a get request is made specifying a valid id parameter
         // TODO
-         result = getRequest(name);
+        // result = getRequest(name);
 
         // THEN, success response is returned
         // TODO
