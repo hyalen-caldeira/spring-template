@@ -10,6 +10,8 @@
 * Implement profile
 * Logs
 * How to make testing to ignore swagger?
+* Create application properties per environment
+  * application-test.properties, application-dev.test, etc
 * config
   * domain
     * All DAOs
@@ -17,6 +19,7 @@
   * DataConfig
   * SecurityConfig
   * WebMvcConfig
+  * Parametrize what is possible on application.properties
 
 ### Dependencies
 * Spring Web
@@ -75,6 +78,8 @@
       * **_@Repository_**
 * **_@Primary_**
 * **_@Qualifier_**
+* **_@Value_**
+* **_@Profile_**
 ##### **Unit & Integration Test**
 * **_@WebMvcTest_** - used for Unit Test
   * Is used for controller layer unit testing. Scans only for the controllers (@Controller, @RestController, ...)

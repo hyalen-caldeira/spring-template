@@ -1,5 +1,6 @@
 package us.hyalen.springtemplate.core.service;
 
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import us.hyalen.springtemplate.core.Domain;
@@ -13,8 +14,8 @@ import java.util.Optional;
 
 @Service
 public class CompanyServiceImpl extends Domain implements CompanyService {
-    @Autowired
-    CompanyDao dao;
+    @Setter
+    private static CompanyDao dao;
 
     @Override
     public List<CompanyModel> getAllCompanies() {
