@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
-@SpringBootApplication // (exclude = {HibernateJpaAutoConfiguration.class})
+@SpringBootApplication (exclude = {HibernateJpaAutoConfiguration.class})
 public class SpringTemplateApplication {
 
 	@PostConstruct

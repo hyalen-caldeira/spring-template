@@ -35,7 +35,7 @@ public class DataConfig {
     @Bean (name = "h2Properties")
     @Profile({"dev", "integrationTest"})
     @Primary
-    public Properties getHibernateProperties() {
+    public Properties hibernateProperties() {
         log.info("DataConfig, SETTING HIBERNATE PROPERTIES");
 
         Properties properties = new Properties();
@@ -63,16 +63,16 @@ public class DataConfig {
     }
 
     @Bean(name = "h2DataSource")
-    @ConfigurationProperties(prefix = "datasource")
+    @ConfigurationProperties("datasource")
     @Profile({"dev", "integrationTest"})
     @Primary
-    public DataSource getDataSource(@Value("${locale-alias.portfolio}") String alias) {
+    public DataSource h2DataSource(@Value("${locale-alias.portfolio}") String alias) {
         log.info("DataConfig, SETTING H2 DATA SOURCE");
 
-        String driverClassName = environment.getProperty("db_ip." + alias);
-        String url = environment.getProperty("url." + alias);
-        String userName = environment.getProperty("username." + alias);
-        String password = environment.getProperty("password." + alias);
+        String driverClassName = environment.getProperty("datasource.driverClassName." + alias);
+        String url = environment.getProperty("datasource.url." + alias);
+        String userName = environment.getProperty("datasource.username." + alias);
+        String password = environment.getProperty("datasource.password." + alias);
         // Integer port = Integer.parseInt(environment.getProperty("db_port." + alias));
 
         return DataSourceBuilder
@@ -88,7 +88,7 @@ public class DataConfig {
 
     @Bean(name = "mySqlDataSource")
     @ConfigurationProperties(prefix = "datasource")
-    @Profile({"dev", "integrationTest"})
+    @Profile({"prod", "integrationTest"})
     public DataSource mySqlDataSource()
     {
         log.info("DataConfig, SETTING MYSQL DATA SOURCE");
@@ -101,8 +101,8 @@ public class DataConfig {
                 .build();
     }
 
-    @Bean
-    public HibernateTransactionManager getTransactionManager(@Qualifier("h2SessionFactory") SessionFactory sessionFactory) {
+    @Bean // (name = "transactionManager")
+    public HibernateTransactionManager transactionManager(@Qualifier("h2SessionFactory") SessionFactory sessionFactory) {
         log.info("DataConfig, SETTING TRANSACTION MANAGER");
 
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
@@ -114,7 +114,7 @@ public class DataConfig {
     @Bean(name = "h2SessionFactory")
     @Profile({"dev", "integrationTest"})
     @Primary
-    public LocalSessionFactoryBean getSessionFactory(
+    public LocalSessionFactoryBean sessionFactory(
             @Qualifier("h2Properties") Properties properties,
             EventLogInterceptor eventLogInterceptor,
             @Qualifier("h2DataSource") DataSource dataSource) {

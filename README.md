@@ -20,6 +20,8 @@
   * SecurityConfig
   * WebMvcConfig
   * Parametrize what is possible on application.properties
+* Test
+  * TestDataConfig
 
 ### Dependencies
 * Spring Web
@@ -57,6 +59,9 @@
   * The environment variable could obviously be created through of any shell script startup file
 * The profiles can also be informed by command line
   * Example: $ java -jar -Dspring.profiles.active=production name_of_application.jar
+* Profile can be set on maven through <profiles> tag
+  * Run specific profile - mvn clean package -Pprod
+  * On application.properties - spring.profiles.active=@spring.profiles.active@
 ---
 ### Keywords
 * Ioc
@@ -142,7 +147,7 @@
   * Set the required custom message in the controllers
 * application.properties - include the following set
   * spring.mvc.pathmatch.matching-strategy=ant-path-matcher
-* http://localhost:8080/swagger-ui or http://localhost:8080/swagger-ui/index.html
+* http://localhost:8080/swagger-ui/ or http://localhost:8080/swagger-ui/index.html
 ---
 ### JPA - Hibernate
 * Hibernate tips here ...
