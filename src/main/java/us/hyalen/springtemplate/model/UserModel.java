@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 public class UserModel extends DateAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "ID", unique = true, nullable = false)
     private Long id;
 
     @NotBlank

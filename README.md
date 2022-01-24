@@ -1,13 +1,67 @@
 # spring-template
 
+### TODO
+* Where to launch exception in case something goes wrong? Controller, service, DAO, ...?
+* Take a look on 2.11 as example to see how o use @Query annotation on Repositories
+* Swagger bean validation
+* Messages returned by controller's methods
+* Validate - CompanyServiceImpl
+  * Test validate
+* Implement profile
+* Logs
+* How to make testing to ignore swagger?
+* Create application properties per environment
+  * application-test.properties, application-dev.test, etc
+* config
+  * domain
+    * All DAOs
+  * AuditConfig
+  * DataConfig
+  * SecurityConfig
+  * WebMvcConfig
+  * Parametrize what is possible on application.properties
+* Test
+  * TestDataConfig
+
 ### Dependencies
-  * Spring Web
-  * Thymeleaf
-  * Spring Boot DevTools
-  * Spring Security
-  * H2 Database
-  * MyBatis Framework
-  * Spring Data JPA
+* Spring Web
+* Thymeleaf
+* Spring Boot DevTools
+* Spring Security
+* H2 Database
+* MyBatis Framework
+* Spring Data JPA
+* Others:
+  * MapStruct
+    * Observe that, if you are using Lombok, annotationProcessorPaths must be properly configured on pom.xml
+  * Lombok
+  * Swagger - springfox (springfox-boot-starter)
+  * commons-lang3
+---
+### Directory Structures
+* config
+* core
+  * Packages
+    * dao
+    * dto
+    * mapper
+    * service
+    * web
+  * ApiResponse
+  * Domain
+  * InvalidFieldException
+  * NotFoundException
+  * ValidationError
+---
+### Active Profiles
+* In order to set up which profile (Production, Development, Test, etc) should be considered, each application should set up the environment variable SPRING_PROFILES_ACTIVE. If there are more than one profile it should be separated by comma
+  * Example: $ export SPRING_PROFILES_ACTIVE=QA, Development
+  * The environment variable could obviously be created through of any shell script startup file
+* The profiles can also be informed by command line
+  * Example: $ java -jar -Dspring.profiles.active=production name_of_application.jar
+* Profile can be set on maven through <profiles> tag
+  * Run specific profile - mvn clean package -Pprod
+  * On application.properties - spring.profiles.active=@spring.profiles.active@
 ---
 ### Keywords
 * Ioc
@@ -29,16 +83,27 @@
       * **_@Repository_**
 * **_@Primary_**
 * **_@Qualifier_**
+* **_@Value_**
+* **_@Profile_**
+##### **Unit & Integration Test**
+* **_@WebMvcTest_** - used for Unit Test
+  * Is used for controller layer unit testing. Scans only for the controllers (@Controller, @RestController, ...)
+* **_@MockBean_**
+  * The beans (Services, Repositories, etc) are not auto-created. You must mock them
+  * Autowired MockMvc to simulate http request
+* **_SpringBootTest_** - user for Integration Test
+  * The **_@SpringBootTest_** annotation is useful for integration testing and is chosen over @WebMvcTest because **_@SpringBootTest_** starts the full application context (including the server) and does not customize component scanning at all. 
+  * **_@SpringBootTest_** will look for the main configuration class, annotated with@SpringBootTest and use that to start a Spring application context that simulates a calling client.
 ---
 ### REST Development
 ##### Creating Order
 1. Entity - Class
    1. data.sql
    2. schema.sql
-2. Resource - Class
-3. Repository - Interface
-4. Dao
-5. Mapper - Interface
+2. DTO - Class
+3. Mapper - Interface
+4. Repository - Interface
+5. DAO
 6. Service
    1. Interface
    2. Implementation
@@ -73,11 +138,20 @@
 ### Unit & Integration Test
 * Test tips here ...
 ---
-### Mapper
-* Mapper tips here ...
+### Mapper - MapStruct
+* pom.xml (annotationProcessorPaths) must be properly configured. Lombok may cause issues in case not well configured
 ---
 ### Swagger
-* Swagger tips here ...
+* Create a class SwaggerConfig.java
+  * Set "useDefaultResponseMessages" to false in case you want to customize response messages
+  * Set the required custom message in the controllers
+* application.properties - include the following set
+  * spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+* http://localhost:8080/swagger-ui/ or http://localhost:8080/swagger-ui/index.html
 ---
 ### JPA - Hibernate
 * Hibernate tips here ...
+---
+### GraphQL
+* GraphQL tips here ...
+---
