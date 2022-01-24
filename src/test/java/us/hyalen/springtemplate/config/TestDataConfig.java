@@ -17,6 +17,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -25,7 +26,7 @@ import java.util.Properties;
 // TODO, Get parameters from property file
 @EnableTransactionManagement
 @Configuration
-@Profile("test")
+@ActiveProfiles("test")
 public class TestDataConfig {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
