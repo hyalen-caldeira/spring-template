@@ -63,7 +63,7 @@ public class DataConfig {
     }
 
     @Bean(name = "h2DataSource")
-    @ConfigurationProperties("datasource")
+    @ConfigurationProperties(prefix = "datasource")
     @Profile({"dev", "integrationTest"})
     @Primary
     public DataSource h2DataSource(@Value("${locale-alias.portfolio}") String alias) {
@@ -102,6 +102,7 @@ public class DataConfig {
     }
 
     @Bean // (name = "transactionManager")
+    @Profile({"prod", "integrationTest"})
     public HibernateTransactionManager transactionManager(@Qualifier("h2SessionFactory") SessionFactory sessionFactory) {
         log.info("DataConfig, SETTING TRANSACTION MANAGER");
 
@@ -144,6 +145,7 @@ public class DataConfig {
         em.setPersistenceUnitName("portfolio");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(properties);
 
