@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.test.web.servlet.ResultActions;
 import us.hyalen.springtemplate.core.Core;
 import us.hyalen.springtemplate.core.dto.CompanyDto;
@@ -19,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(CompanyController.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Profile("test")
 class CompanyControllerTest extends Core {
     private final String EXIST_NAME = "Accenture";
     private final String BASE_URI = "/api/companies/";

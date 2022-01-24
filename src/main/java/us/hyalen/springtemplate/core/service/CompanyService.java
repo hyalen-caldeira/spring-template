@@ -7,7 +7,6 @@ import us.hyalen.springtemplate.model.CompanyModel;
 import java.util.List;
 import java.util.Optional;
 
-@Service
 public interface CompanyService {
     List<CompanyModel> getAllCompanies();
     Optional<CompanyDto> findByName(String name);
