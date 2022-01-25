@@ -16,13 +16,13 @@ import org.springframework.transaction.TransactionStatus;
 import java.lang.invoke.MethodHandles;
 import java.net.URL;
 
-// The following annotation allows using a non static @BeforeAll and @AfterAll
+// The following annotation allows using a non-static @BeforeAll and @AfterAll
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class Overlay {
     private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
-    protected String insertSqlFilename;
-    protected String cleanupSqlFilename;
+    protected abstract String insertSqlFilename();
+    protected abstract String cleanupSqlFilename();
 
     @Autowired
     @Qualifier("sessionFactory")
@@ -35,17 +35,17 @@ public abstract class Overlay {
 
     @BeforeAll
     public void setupOverlay() {
-        if (insertSqlFilename != null) {
+        if (insertSqlFilename() != null) {
             overlaySql();
-            log.info("--------->>> SQL H2 OVERLAY APPLIED");
+            log.info("SQL H2 OVERLAY APPLIED");
         }
     }
 
     @AfterAll
     public void cleanupOverlay() {
-        if (cleanupSqlFilename != null) {
+        if (cleanupSqlFilename() != null) {
             cleanupSql();
-            log.info("--------->>> SQL H2 CLEANUP APPLIED");
+            log.info("SQL H2 CLEANUP APPLIED");
         }
     }
 
@@ -53,7 +53,7 @@ public abstract class Overlay {
         TransactionStatus transaction = transactionManager.getTransaction(null);
 
         sessionFactory.getCurrentSession()
-                .createNativeQuery(readFromUrl(this.getClass().getClassLoader().getResource(insertSqlFilename)))
+                .createNativeQuery(readFromUrl(this.getClass().getClassLoader().getResource(insertSqlFilename())))
                 .executeUpdate();
 
         transactionManager.commit(transaction);
@@ -63,7 +63,7 @@ public abstract class Overlay {
         TransactionStatus transaction = transactionManager.getTransaction(null);
 
         sessionFactory.getCurrentSession()
-                .createNativeQuery(readFromUrl(this.getClass().getClassLoader().getResource(cleanupSqlFilename)))
+                .createNativeQuery(readFromUrl(this.getClass().getClassLoader().getResource(cleanupSqlFilename())))
                 .executeUpdate();
 
         transactionManager.commit(transaction);

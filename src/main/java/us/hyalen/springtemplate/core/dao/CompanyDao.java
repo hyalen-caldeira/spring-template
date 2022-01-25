@@ -1,6 +1,9 @@
 package us.hyalen.springtemplate.core.dao;
 
+import lombok.Getter;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import us.hyalen.springtemplate.model.CompanyModel;
@@ -14,6 +17,13 @@ import java.util.Optional;
 public class CompanyDao {
     @Autowired
     CompanyRepository repository;
+
+    // --------
+    @Autowired
+    @Qualifier("sessionFactory")
+    @Getter
+    protected SessionFactory sessionFactory;
+    // ---------
 
     public List<CompanyModel> findAll() {
         return repository.findAll();

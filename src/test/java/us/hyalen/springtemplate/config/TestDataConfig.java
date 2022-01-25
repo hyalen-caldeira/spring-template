@@ -34,6 +34,21 @@ public class TestDataConfig {
     private Environment environment;
 
     @Bean
+    @ConfigurationProperties(prefix = "datasource")
+    public DataSource h2DataSource() {
+        log.info("TestDataConfig, SETTING DATA SOURCE");
+
+        return DataSourceBuilder
+                .create()
+                .driverClassName("org.h2.Driver")
+                // .url("jdbc:h2:mem:portfolio_db")
+                .url("jdbc:h2:mem:portfolio_db;init=runscript from 'classpath:sql/schema/portfolio_db.sql';mode=MySql;db_close_on_exit=false")
+                .username("sa")
+//                .password("sa")
+                .build();
+    }
+
+    @Bean
     public Properties hibernateProperties() {
         log.info("TestDataConfig, SETTING HIBERNATE PROPERTIES");
         Properties properties = new Properties();
@@ -45,50 +60,11 @@ public class TestDataConfig {
         // properties.put("hibernate.connection.driver_class", "org.h2.Driver");
         properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         properties.put("hibernate.validationQuery", "SELECT 1 + 1");
-        properties.put("hibernate.hbm2ddl.auto", "update");
-        // Without below property, ocdbSessionFactory.getCurrentSession() will raise "No CurrentSessionContext configured" exception
+        properties.put("hibernate.hbm2ddl.auto", "none");
+        // Without below property, odbcSessionFactory.getCurrentSession() will raise "No CurrentSessionContext configured" exception
         properties.put("hibernate.current_session_context_class","org.springframework.orm.hibernate5.SpringSessionContext");
 
         return properties;
-    }
-
-    @Bean
-    @ConfigurationProperties(prefix = "datasource")
-    public DataSource h2DataSource() {
-        log.info("TestDataConfig, SETTING DATA SOURCE");
-
-        return DataSourceBuilder
-                .create()
-                .driverClassName("org.h2.Driver")
-                .url("jdbc:h2:mem:portfolio_db;init=runscript from 'classpath:sql/schema/portfolio_db.sql';mode=MySql;db_close_on_exit=false")
-                .username("sa")
-//                .password("sa")
-                .build();
-    }
-
-    @Bean // (name = "transactionManager")
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-        log.info("DataConfig, SETTING TRANSACTION MANAGER");
-
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
-
-        return transactionManager;
-    }
-
-    @Bean
-    @Primary
-    public LocalSessionFactoryBean sessionFactory(
-            @Qualifier("hibernateProperties") Properties properties,
-            @Qualifier("h2DataSource") DataSource dataSource) {
-        log.info("TestDataConfig, SETTING SESSION FACTORY");
-        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-
-        localSessionFactoryBean.setDataSource(dataSource);
-        localSessionFactoryBean.setHibernateProperties(properties);
-        localSessionFactoryBean.setPackagesToScan("us.hyalen.springtemplate.model");
-
-        return localSessionFactoryBean;
     }
 
     @Bean
@@ -109,5 +85,30 @@ public class TestDataConfig {
         em.setJpaProperties(properties);
 
         return em;
+    }
+
+    @Bean
+    @Primary
+    public LocalSessionFactoryBean sessionFactory(
+            @Qualifier("hibernateProperties") Properties properties,
+            @Qualifier("h2DataSource") DataSource dataSource) {
+        log.info("TestDataConfig, SETTING SESSION FACTORY");
+        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
+
+        localSessionFactoryBean.setDataSource(dataSource);
+        localSessionFactoryBean.setHibernateProperties(properties);
+        localSessionFactoryBean.setPackagesToScan("us.hyalen.springtemplate.model");
+
+        return localSessionFactoryBean;
+    }
+
+    @Bean // (name = "transactionManager")
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+        log.info("DataConfig, SETTING TRANSACTION MANAGER");
+
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory);
+
+        return transactionManager;
     }
 }
