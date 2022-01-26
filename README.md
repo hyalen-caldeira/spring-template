@@ -22,7 +22,15 @@
   * Parametrize what is possible on application.properties
 * Test
   * TestDataConfig
-
+---
+### Run app
+* mvn clean install -DskipTests
+---
+# MySQL Database
+* Create portfolio_db schema and run the following query to create the user
+create user 'sa'@'localhost' identified by 'sa';
+grant all on portfolio_db.* to 'sa'@'localhost';
+---
 ### Dependencies
 * Spring Web
 * Thymeleaf
@@ -37,6 +45,8 @@
   * Lombok
   * Swagger - springfox (springfox-boot-starter)
   * commons-lang3
+  * Guava
+  * MySQL
 ---
 ### Directory Structures
 * config

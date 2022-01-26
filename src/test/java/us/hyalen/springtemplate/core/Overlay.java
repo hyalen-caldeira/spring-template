@@ -36,16 +36,16 @@ public abstract class Overlay {
     @BeforeAll
     public void setupOverlay() {
         if (insertSqlFilename() != null) {
-            overlaySql();
             log.info("SQL H2 OVERLAY APPLIED");
+            overlaySql();
         }
     }
 
     @AfterAll
     public void cleanupOverlay() {
         if (cleanupSqlFilename() != null) {
-            cleanupSql();
             log.info("SQL H2 CLEANUP APPLIED");
+            cleanupSql();
         }
     }
 

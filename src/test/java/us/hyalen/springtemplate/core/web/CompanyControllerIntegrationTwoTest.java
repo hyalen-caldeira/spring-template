@@ -3,7 +3,9 @@ package us.hyalen.springtemplate.core.web;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
@@ -23,12 +25,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 // The following annotation allows using a non-static @BeforeAll and @AfterAll
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ActiveProfiles("test")
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
 class CompanyControllerIntegrationTwoTest extends Core {
     private final String EXIST_NAME = "Accenture";
     private final String BASE_URI = "/api/companies/";
 
-    // @MockBean
-    // CompanyService service;
+//    @MockBean
+//    CompanyService service;
 
     @Override
     public String insertSqlFilename() {

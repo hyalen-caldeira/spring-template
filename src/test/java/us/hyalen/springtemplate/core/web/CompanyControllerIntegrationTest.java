@@ -9,6 +9,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import us.hyalen.springtemplate.core.Core;
 import us.hyalen.springtemplate.core.dto.CompanyDto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,12 +19,22 @@ import java.util.List;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class CompanyControllerIntegrationTest {
+public class CompanyControllerIntegrationTest extends Core {
     @LocalServerPort
     private int port;
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @Override
+    public String insertSqlFilename() {
+        return "sql/tbl-company.v1/company.sql";
+    }
+
+    @Override
+    public String cleanupSqlFilename() {
+        return "sql/tbl-company.v1/company-cleanup.sql";
+    }
 
     @Test
     public void getCompanyByName() {
