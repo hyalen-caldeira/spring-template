@@ -3,7 +3,9 @@ package us.hyalen.springtemplate.core.web;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
@@ -20,19 +22,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 //@WebMvcTest(CompanyController.class)
+// The following annotation allows using a non-static @BeforeAll and @AfterAll
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ActiveProfiles("test")
-class CompanyControllerTest extends Core {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+class CompanyControllerIntegrationTwoTest extends Core {
     private final String EXIST_NAME = "Accenture";
     private final String BASE_URI = "/api/companies/";
 
-    @MockBean
-    CompanyService service;
+//    @MockBean
+//    CompanyService service;
 
-    @BeforeAll
-    protected void setup() {
-        insertSqlFilename = "src/test/resources/sql/tbl-company.v1/company.sql";
-        cleanupSqlFilename = "src/test/resources/sql/tbl-company.v1/company-cleanup.sql";
+    @Override
+    public String insertSqlFilename() {
+        return "sql/tbl-company.v1/company.sql";
+    }
+
+    @Override
+    public String cleanupSqlFilename() {
+        return "sql/tbl-company.v1/company-cleanup.sql";
     }
 
     @Test
@@ -41,20 +50,20 @@ class CompanyControllerTest extends Core {
         String name = EXIST_NAME;
 
         // WHEN a get request is made specifying a valid id parameter
-        ResultActions result = mockMvc.perform(get(BASE_URI))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(CompanyDto.MEDIA_TYPE))
-                .andExpect(content().json("[]"));
+//        ResultActions result = mockMvc.perform(get(BASE_URI))
+//                .andExpect(status().isOk())
+//                .andExpect(content().contentType(CompanyDto.MEDIA_TYPE))
+//                .andExpect(content().json("[]"));
 
-        verify(service, times(1)).getAllCompanies();
+        // verify(service, times(1)).getAllCompanies();
 
         // WHEN a get request is made specifying a valid id parameter
         // TODO
-        // result = getRequest(name);
+        ResultActions result = getRequest(name);
 
         // THEN, success response is returned
         // TODO
-        // result.andExpect(status().isOk());
+        result.andExpect(status().isOk());
 
         // AND the company that we get back is as expected
         // TODO
@@ -66,6 +75,6 @@ class CompanyControllerTest extends Core {
     }
 
     private ResultActions getRequest(String name) throws Exception {
-        return mockMvc.perform(get(BASE_URI).accept(CompanyDto.MEDIA_TYPE));
+        return mockMvc.perform(get(BASE_URI + name).accept(CompanyDto.MEDIA_TYPE));
     }
 }

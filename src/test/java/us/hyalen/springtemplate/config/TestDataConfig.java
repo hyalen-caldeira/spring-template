@@ -10,7 +10,6 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -34,6 +33,21 @@ public class TestDataConfig {
     private Environment environment;
 
     @Bean
+    @ConfigurationProperties(prefix = "datasource")
+    public DataSource h2DataSource() {
+        log.info("TestDataConfig, SETTING DATA SOURCE");
+
+        return DataSourceBuilder
+                .create()
+                .driverClassName("org.h2.Driver")
+                // .url("jdbc:h2:mem:portfolio_db")
+                .url("jdbc:h2:mem:portfolio_db;init=runscript from 'classpath:sql/schema/portfolio_db.sql';mode=MySql;db_close_on_exit=false")
+                .username("sa")
+//                .password("sa")
+                .build();
+    }
+
+    @Bean
     public Properties hibernateProperties() {
         log.info("TestDataConfig, SETTING HIBERNATE PROPERTIES");
         Properties properties = new Properties();
@@ -45,35 +59,31 @@ public class TestDataConfig {
         // properties.put("hibernate.connection.driver_class", "org.h2.Driver");
         properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         properties.put("hibernate.validationQuery", "SELECT 1 + 1");
-        properties.put("hibernate.hbm2ddl.auto", "update");
-        // Without below property, ocdbSessionFactory.getCurrentSession() will raise "No CurrentSessionContext configured" exception
+        properties.put("hibernate.hbm2ddl.auto", "none");
+        // Without below property, odbcSessionFactory.getCurrentSession() will raise "No CurrentSessionContext configured" exception
         properties.put("hibernate.current_session_context_class","org.springframework.orm.hibernate5.SpringSessionContext");
 
         return properties;
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "datasource")
-    public DataSource h2DataSource() {
-        log.info("TestDataConfig, SETTING DATA SOURCE");
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory (
+            @Qualifier("hibernateProperties") Properties properties,
+            @Qualifier("h2DataSource") DataSource dataSource) {
+        log.info("TestDataConfig, SETTING ENTITY MANAGER FACTORY");
 
-        return DataSourceBuilder
-                .create()
-                .driverClassName("org.h2.Driver")
-                .url("jdbc:h2:mem:portfolio_db;init=runscript from 'classpath:sql/schema/portfolio_db.sql';mode=MySql;db_close_on_exit=false")
-                .username("sa")
-//                .password("sa")
-                .build();
-    }
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 
-    @Bean // (name = "transactionManager")
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
-        log.info("DataConfig, SETTING TRANSACTION MANAGER");
+        em.setDataSource(dataSource);
+        em.setPackagesToScan("us.hyalen.springtemplate.model");
+        em.setPersistenceUnitName("portfolio");
 
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
+        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 
-        return transactionManager;
+        em.setJpaVendorAdapter(vendorAdapter);
+        em.setJpaProperties(properties);
+
+        return em;
     }
 
     @Bean
@@ -91,23 +101,13 @@ public class TestDataConfig {
         return localSessionFactoryBean;
     }
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            @Qualifier("hibernateProperties") Properties properties,
-            @Qualifier("h2DataSource") DataSource dataSource) {
-        log.info("TestDataConfig, SETTING ENTITY MANAGER FACTORY");
+    @Bean // (name = "transactionManager")
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+        log.info("DataConfig, SETTING TRANSACTION MANAGER");
 
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory);
 
-        em.setDataSource(dataSource);
-        em.setPackagesToScan("us.hyalen.springtemplate.model");
-        em.setPersistenceUnitName("portfolio");
-
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-
-        em.setJpaVendorAdapter(vendorAdapter);
-        em.setJpaProperties(properties);
-
-        return em;
+        return transactionManager;
     }
 }
