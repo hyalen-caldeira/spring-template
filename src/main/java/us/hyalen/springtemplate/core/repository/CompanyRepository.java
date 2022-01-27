@@ -1,4 +1,4 @@
-package us.hyalen.springtemplate.repository;
+package us.hyalen.springtemplate.core.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

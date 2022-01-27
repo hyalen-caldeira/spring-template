@@ -1,6 +1,7 @@
 package us.hyalen.springtemplate.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class CompanyDto {
     public static final String MEDIA_TYPE = "application/vnd.spring-template.company.v1+json";
 

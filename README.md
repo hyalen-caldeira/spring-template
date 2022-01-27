@@ -24,12 +24,12 @@
   * TestDataConfig
 ---
 ### Run app
-* mvn clean install -DskipTests
+* ```mvn clean install -DskipTests```
 ---
 # MySQL Database
 * Create portfolio_db schema and run the following query to create the user
-create user 'sa'@'localhost' identified by 'sa';
-grant all on portfolio_db.* to 'sa'@'localhost';
+  *```create user 'sa'@'localhost' identified by 'sa';```
+  * ```grant all on portfolio_db.* to 'sa'@'localhost';```
 ---
 ### Dependencies
 * Spring Web
@@ -153,7 +153,15 @@ grant all on portfolio_db.* to 'sa'@'localhost';
 * Postman tips here ...
 ---
 ### Unit & Integration Test
-* Test tips here ...
+* **_@SpringBootTest_**
+  * This annotation goes on your unit test class. creates an entire Spring ApplicationContext when running unit tests. It is used if you need to test controller or service classes, or perform integration tests spanning multiple layers.
+* **_@DataJpaTest_**
+  * This annotation provides an alternate way to test your data layer without providing an application.properties file. It disables Spring autoconfiguration and automatically uses an in-memory database if available. It only loads Entities and Spring Data JPA repositories, but not your Services or Controllers.
+* **_TestEntityManager_**
+  * **_TestEntityManager_** is a class provided by Spring Boot that provides useful methods for persisting test data inside persistence unit tests. It is still available in @DataJpaTests despite the rest of the app not being wired up.
+* **_@AutoConfigureTestDatabase_**
+  * This annotation can be used with either @SpringBootTest or @DataJpaTest. You can use it to customize Spring’s behavior for replacing the normal datasource. For example, the following annotation could be used in conjunction with @DataJpaTest to indicate that Spring should NOT replace the datasource with an in-memory datasource.
+    * ```@AutoConfigureTestDatabase(replace=Replace.NONE)```
 ---
 ### Mapper - MapStruct
 * pom.xml (annotationProcessorPaths) must be properly configured. Lombok may cause issues in case not well configured
@@ -166,8 +174,21 @@ grant all on portfolio_db.* to 'sa'@'localhost';
   * spring.mvc.pathmatch.matching-strategy=ant-path-matcher
 * http://localhost:8080/swagger-ui/ or http://localhost:8080/swagger-ui/index.html
 ---
-### JPA - Hibernate
-* Hibernate tips here ...
+### JPA - Hibernate - DataSource - application.properties
+* ```spring.datasource.initialization-mode```
+  * Embedded: Default. Initialization performed on embedded databases only.
+  * Always: Initialization for both embedded and external databases.
+  * Never: For production - No initialization for either embedded or external databases.
+* ```spring.jpa.hibernate.ddl-auto``` - this property allows you to customize Hibernate’s initialization behavior.
+  * create: Drop all tables for defined Entities, then create them.
+  * create-drop: Create tables, drop them when application stops.
+  * update: Attempt to migrate previous version of tables to match current Entities.
+  * validate: Throw an exception if tables or columns are missing.
+  * none: Do not initialize tables.
+* show-sql- Spring offers a useful command to print all generated sql commands to the console
+  * ```spring.jpa.show-sql=true```
+* There’s also a hibernate property for formatting the sql output that makes it easier to read
+  * ```spring.jpa.properties.hibernate.format_sql=true```
 ---
 ### GraphQL
 * GraphQL tips here ...

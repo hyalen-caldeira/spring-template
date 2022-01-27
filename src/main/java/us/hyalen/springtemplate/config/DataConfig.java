@@ -16,7 +16,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaVendorAdapter;
-//import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import us.hyalen.springtemplate.interceptor.EventLogInterceptor;
@@ -25,67 +25,67 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 //@EnableTransactionManagement
-//@Configuration
+@Configuration
+@Profile({"dev", "integrationTest"})
 public class DataConfig {
-//    private final Logger log = LoggerFactory.getLogger(this.getClass());
-//
-//    @Autowired
-//    private Environment environment;
-//
-//    @Bean (name = "h2Properties")
-//    @Profile({"dev", "integrationTest"})
-//    @Primary
-//    public Properties hibernateProperties() {
-//        log.info("DataConfig, SETTING HIBERNATE PROPERTIES");
-//
-//        Properties properties = new Properties();
-//        properties.put("hibernate.jdbc.fetch_size", 500);
-//
-//        // Allow System properties to overwrite this, so that in IDE we can set it to show SQL
-//        if (System.getProperty("hibernate.show_sql") != null) {
-//            properties.put("hibernate.format_sql", true);
-//            properties.put("hibernate.show_sql", true);
-//        } else {
-//            properties.put("hibernate.format_sql", true);
-//            properties.put("hibernate.show_sql", true);
-//        }
-//
-//        properties.put("testWhileIdle", true);
-//        properties.put("validationQuery", "SELECT 1 + 1");
-//        // properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
-//        properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-//        properties.put("hibernate.hbm2ddl.auto", "update");
-//
-//        // Without below property, ocdbSessionFactory.getCurrentSession() will raise "No CurrentSessionContext configured" exception
-//        properties.put("hibernate.current_session_context_class","org.springframework.orm.hibernate5.SpringSessionContext");
-//
-//        return properties;
-//    }
-//
-//    @Bean(name = "h2DataSource")
-//    @ConfigurationProperties(prefix = "datasource")
-//    @Profile({"dev", "integrationTest"})
-//    @Primary
-//    public DataSource h2DataSource(@Value("${locale-alias.portfolio}") String alias) {
-//        log.info("DataConfig, SETTING H2 DATA SOURCE");
-//
-//        String driverClassName = environment.getProperty("datasource.driverClassName." + alias);
-//        String url = environment.getProperty("datasource.url." + alias);
-//        String userName = environment.getProperty("datasource.username." + alias);
-//        String password = environment.getProperty("datasource.password." + alias);
-//        // Integer port = Integer.parseInt(environment.getProperty("db_port." + alias));
-//
-//        return DataSourceBuilder
-//                .create()
-//                .driverClassName(driverClassName)
-//                .url(url)
-//                .username(userName)
-//                .password(password)
-//                .build();
-//
-//        // dataSource.setUrl("jdbc:mysql://" + server + ":" + port + "/" + dbName + "?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false");
-//    }
-//
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private Environment environment;
+
+    @Bean (name = "h2Properties")
+    @Profile({"dev", "integrationTest"})
+    @Primary
+    public Properties hibernateProperties() {
+        log.info("DataConfig, SETTING HIBERNATE PROPERTIES");
+
+        Properties properties = new Properties();
+        properties.put("hibernate.jdbc.fetch_size", 500);
+
+        // Allow System properties to overwrite this, so that in IDE we can set it to show SQL
+        if (System.getProperty("hibernate.show_sql") != null) {
+            properties.put("hibernate.format_sql", true);
+            properties.put("hibernate.show_sql", true);
+        } else {
+            properties.put("hibernate.format_sql", true);
+            properties.put("hibernate.show_sql", true);
+        }
+
+        properties.put("testWhileIdle", true);
+        properties.put("validationQuery", "SELECT 1 + 1");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
+        // properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        properties.put("hibernate.hbm2ddl.auto", "update");
+
+        // Without below property, ocdbSessionFactory.getCurrentSession() will raise "No CurrentSessionContext configured" exception
+        properties.put("hibernate.current_session_context_class","org.springframework.orm.hibernate5.SpringSessionContext");
+
+        return properties;
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix="us.hyalen.datasource")
+    @Primary
+    public DataSource getDataSource(@Value("${locale-alias.portfolio}") String alias) {
+        log.info("DataConfig, SETTING MYSQL DATA SOURCE");
+
+        // String driverClassName = environment.getProperty("datasource.driverClassName." + alias);
+        // String url = environment.getProperty("datasource.url." + alias);
+        // String userName = environment.getProperty("username" + alias);
+        // String password = environment.getProperty("password" + alias);
+        // Integer port = Integer.parseInt(environment.getProperty("db_port." + alias));
+
+        return DataSourceBuilder
+                .create()
+                // .driverClassName(driverClassName)
+                .url("jdbc:mysql://localhost:3306/portfolio_db?createDatabaseIfNotExist=true")
+                // .username(userName)
+                // .password(password)
+                .build();
+
+        // dataSource.setUrl("jdbc:mysql://" + server + ":" + port + "/" + dbName + "?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false");
+    }
+
 //    @Bean(name = "mySqlDataSource")
 //    @ConfigurationProperties(prefix = "datasource")
 //    @Profile({"prod", "integrationTest"})

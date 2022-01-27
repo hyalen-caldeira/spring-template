@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import us.hyalen.springtemplate.model.CompanyModel;
-import us.hyalen.springtemplate.repository.CompanyRepository;
+import us.hyalen.springtemplate.core.repository.CompanyRepository;
 
 import java.util.List;
 import java.util.Optional;
