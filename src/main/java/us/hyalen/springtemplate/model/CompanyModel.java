@@ -15,8 +15,8 @@ import javax.validation.constraints.Size;
 @Table(
         name = "TBL_COMPANY"
         ,uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"NAME"})
-        }
+        @UniqueConstraint(columnNames = {"NAME"})
+}
         ,schema = "PORTFOLIO_DB"
 )
 @Getter

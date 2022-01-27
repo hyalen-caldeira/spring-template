@@ -33,26 +33,26 @@ public class CompanyController {
     @GetMapping
     public ResponseEntity<List<CompanyModel>> getAllCompanies() {
         var list = service.getAllCompanies();
-        
+
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{name}")
     public ResponseEntity<CompanyDto> getCompanyByName(@PathVariable(value = "name") String name) {
-        CompanyDto companyDto = service.findByName(name).orElseThrow(NotFoundException::new);
+        CompanyDto companyDto = service.findByName(name);
 
         return ok(companyDto);
     }
 
     @PutMapping(value = "/{name}", consumes = CompanyDto.MEDIA_TYPE)
     public void update(@Valid @RequestBody CompanyDto dto, @PathVariable(value = "name") String name) {
-        service.findByName(name).orElseThrow(NotFoundException::new);
+        service.findByName(name);
         service.update(dto);
     }
 
     @DeleteMapping(value = "/{name}")
     public ResponseEntity<?> delete(@PathVariable(value = "name") String name) {
-        service.findByName(name).orElseThrow(NotFoundException::new);
+        service.findByName(name);
 //        service.delete();
 
         // Not using swagger version of API response

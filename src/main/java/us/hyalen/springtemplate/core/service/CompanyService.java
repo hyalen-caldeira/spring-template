@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface CompanyService {
     List<CompanyModel> getAllCompanies();
-    Optional<CompanyDto> findByName(String name);
+    CompanyDto findByName(String name);
     void update(CompanyDto dto);
 }

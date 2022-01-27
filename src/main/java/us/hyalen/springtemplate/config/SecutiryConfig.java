@@ -1,4 +1,4 @@
 package us.hyalen.springtemplate.config;
 
-public class SecurityConfig {
+public class SecutiryConfig {
 }
