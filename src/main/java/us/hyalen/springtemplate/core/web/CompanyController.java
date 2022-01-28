@@ -1,13 +1,12 @@
 package us.hyalen.springtemplate.core.web;
 
 //import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import us.hyalen.springtemplate.core.ApiResponse;
-import us.hyalen.springtemplate.core.NotFoundException;
 import us.hyalen.springtemplate.core.dto.CompanyDto;
 import us.hyalen.springtemplate.core.service.CompanyService;
 import us.hyalen.springtemplate.model.CompanyModel;
@@ -16,17 +15,11 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-import static org.springframework.http.ResponseEntity.ok;
 import static org.springframework.http.ResponseEntity.created;
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController("companyController_v1")
 @RequestMapping(value = "/api/companies", produces = CompanyDto.MEDIA_TYPE)
-// The following annotation could also be configured on SwaggerConfig.java
-//@ApiResponses(value = {
-//        @ApiResponse(code=400, message = "This is a bad request, please follow the API documentation for the proper request format."),
-//        @ApiResponse(code=401, message = "Due to security constraints, your access request cannot be authorized."),
-//        @ApiResponse(code=500, message = "The server is down. Please make sure that the Company microservice is running.")
-//})
 public class CompanyController {
     private CompanyService service;
 

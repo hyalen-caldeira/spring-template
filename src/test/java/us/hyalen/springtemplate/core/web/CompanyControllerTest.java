@@ -14,6 +14,7 @@ import us.hyalen.springtemplate.core.service.CompanyService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.mockito.Mockito.times;
@@ -48,6 +49,10 @@ class CompanyControllerTest {
                 .andExpect(status().isOk());
 
         verify(companyService, times(1)).findByName("anyname");
+    }
+
+    @Test
+    void create() throws Exception {
     }
 
     @Test
