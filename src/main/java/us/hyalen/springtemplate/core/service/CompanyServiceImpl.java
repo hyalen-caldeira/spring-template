@@ -16,6 +16,8 @@ public class CompanyServiceImpl extends Domain implements CompanyService {
     @Setter
     private static CompanyDao dao;
 
+    CompanyMapper mapper = CompanyMapper.INSTANCE;
+
     @Override
     public List<CompanyModel> getAllCompanies() {
         return (List<CompanyModel>) dao.findAll();
@@ -24,13 +26,19 @@ public class CompanyServiceImpl extends Domain implements CompanyService {
     @Override
     public CompanyDto findByName(String name) {
         var model = dao.findByName(name).orElseThrow(NotFoundException::new);
-
-        return CompanyMapper.INSTANCE.mapModelToDto(model);
+        return mapper.mapModelToDto(model);
     }
 
     @Override
     public void update(CompanyDto dto) {
         validate();
-        dao.update(CompanyMapper.INSTANCE.mapDtoToModel(dto));
+        dao.update(mapper.mapDtoToModel(dto));
+    }
+
+    @Override
+    public CompanyDto create(CompanyDto dto) {
+        validate();
+        CompanyModel model = dao.create(CompanyMapper.INSTANCE.mapDtoToModel(dto));
+        return mapper.mapModelToDto(model);
     }
 }

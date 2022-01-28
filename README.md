@@ -47,6 +47,8 @@
   * commons-lang3
   * Guava
   * MySQL
+  * javax.validation - validation-api
+  * org.springframework.boot - spring-boot-starter-validation
 ---
 ### Directory Structures
 * config

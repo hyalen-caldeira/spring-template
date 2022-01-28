@@ -11,4 +11,5 @@ public interface CompanyService {
     List<CompanyModel> getAllCompanies();
     CompanyDto findByName(String name);
     void update(CompanyDto dto);
+    CompanyDto create(CompanyDto dto);
 }

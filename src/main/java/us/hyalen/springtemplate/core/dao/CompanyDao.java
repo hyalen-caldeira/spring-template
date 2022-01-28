@@ -52,12 +52,12 @@ public class CompanyDao {
 //        User.Builder builder = (new User.Builder()).withUserModel(model.orElse(null));
 //        return Optional.ofNullable(builder == null ? null : builder.build());
 //    }
-//
-//    public User create(UserModel model) {
-//        getSessionFactory().getCurrentSession().save(model);
-//        return new User.Builder().withUserModel(model).build();
-//    }
-//
+
+    public CompanyModel create(CompanyModel model) {
+        model = repository.save(model);
+        return model;
+    }
+
 //    public void delete(UserModel model) {
 //        getSessionFactory().getCurrentSession().delete(model);
 //    }
