@@ -45,6 +45,7 @@ public class SomeExampleTest {
     }
 
     // Reflection method used to manually mock an object
+    // Should be put in a TestUtils class
     public static void injectObjects(Object target, String fieldName, Object toInject) {
         boolean wasPrivate = false;
 
