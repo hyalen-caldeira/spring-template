@@ -21,7 +21,6 @@ public class CompanyDao {
 
     public Optional<CompanyModel> findByName(String name) {
         Optional<CompanyModel> model = repository.findByName(name);
-
         return model;
     }
 

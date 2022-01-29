@@ -23,7 +23,7 @@ import static org.springframework.http.ResponseEntity.ok;
 public class CompanyController {
     private CompanyService service;
 
-    CompanyController(CompanyService service) {
+    public CompanyController(CompanyService service) {
         this.service = service;
     }
 
@@ -37,7 +37,6 @@ public class CompanyController {
     @GetMapping(value = "/{name}")
     public ResponseEntity<CompanyDto> getCompanyByName(@PathVariable(value = "name") String name) {
         CompanyDto companyDto = service.findByName(name);
-
         return ok(companyDto);
     }
 

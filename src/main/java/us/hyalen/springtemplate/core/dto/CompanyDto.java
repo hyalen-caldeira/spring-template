@@ -2,10 +2,7 @@ package us.hyalen.springtemplate.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +12,7 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@NoArgsConstructor
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class CompanyDto {
     public static final String MEDIA_TYPE = "application/vnd.spring-template.company.v1+json";

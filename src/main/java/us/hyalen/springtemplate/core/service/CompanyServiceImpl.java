@@ -18,6 +18,7 @@ public class CompanyServiceImpl extends Domain implements CompanyService {
 
     CompanyMapper mapper = CompanyMapper.INSTANCE;
 
+    // TODO
     @Override
     public List<CompanyModel> getAllCompanies() {
         return (List<CompanyModel>) dao.findAll();

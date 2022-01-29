@@ -30,9 +30,9 @@
 * ```mvn clean install -DskipTests```
 ---
 # MySQL Database
-* Create portfolio_db schema and run the following query to create the user
-  *```create user 'sa'@'localhost' identified by 'sa';```
-  * ```grant all on portfolio_db.* to 'sa'@'localhost';```
+* Create portfolio_db schema and run the following query to create the user  
+```create user 'sa'@'localhost' identified by 'sa';```  
+```grant all on portfolio_db.* to 'sa'@'localhost';```
 ---
 # Dependencies
 * Spring Web
@@ -140,6 +140,29 @@ Software testing is broadly divided into the following types - Functional, Non-F
 * **_@AutoConfigureTestDatabase_**
   * This annotation can be used with either @SpringBootTest or @DataJpaTest. You can use it to customize Spring’s behavior for replacing the normal datasource. For example, the following annotation could be used in conjunction with @DataJpaTest to indicate that Spring should NOT replace the datasource with an in-memory datasource.
     * ```@AutoConfigureTestDatabase(replace=Replace.NONE)```
+### Few important methods and annotations provided by Mockito are:
+* **_mock()/@Mock_** - To create mock object. Here, mock() is an overloaded static method which accepts Class<T> classToMock as an argument and correspondingly returns a mock instance.
+* **_when()/given()_** - To specify the behaviour of mock object. when() method takes a particular method X as argument and set the expected (mocked) return value as Y. Following are the few examples:  
+```when(mock.someMethod()).thenReturn(200);
+//parameterized methods as argument
+when(mock.someMethod(anyString())).thenReturn(200);
+
+//throw an exception
+when(mock.someMethod("some argument")).thenThrow(new RuntimeException());
+```
+* **_spy()/@Spy_** - It is used for partial mocking. It means that the real methods are invoked but still can be verified and stubbed.  
+```
+// Declare
+@Spy
+StockManagement spyStockManagement;
+
+// Use
+spyStockManagement = spy(new StockManagement());
+doReturn("Testing spy ...").when(spyStockManagement).getLocatorCode(VALID_ISBN);
+assertEquals("Testing spy ...", spyStockManagement.getLocatorCode(VALID_ISBN));
+```
+* There are few more methods and annotations available, such as @InjectMocks, verify()
+* Note that if a project contains private methods to test, then we can't use Mockito as it does not mock private methods. Mockito assumes that private methods don't exist from the viewpoint of testing.
 ---
 # REST Development
 ### Creating Order
