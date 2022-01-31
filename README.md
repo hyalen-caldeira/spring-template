@@ -28,7 +28,8 @@
   * ValidationError
 * Interceptor
 * Model
-  * Audit - Package
+  * Audit
+    * DateAudit
   * Entity Tables
 * Security
 ---
@@ -64,23 +65,33 @@
 ## REST Development
 ### Creating Order
 1. Entity - model
-  1. data.sql
-  2. schema.sql
+   1. data.sql
+   2. schema.sql
 2. Core
-  1. Files
+3. Files
     1. ApiResponse
     2. Domain
     3. InvalidFieldException
     4. NotFoundException
     5. ValidationError
-  2. DTO - Class
-  3. Mapper - Interface
-  4. Repository - Interface
-  5. DAO
-  6. Service
-    1. Interface
-    2. Implementation
-  7. Web - Controller
+4. DTO - Class
+5. Mapper - Interface
+6. Repository - Interface
+7. DAO
+8. Config
+   1. Domain
+      1. DAO config
+   2. Audit
+   3. Auditor Aware
+   4. Data
+   5. Domain
+   6. Security
+   7. Swagger
+   8. Web MVC
+9. Service
+   1. Interface
+   2. Implementation
+10. Web - Controller
 ---
 ## JPA - Hibernate - DataSource - application.properties
 * ```spring.datasource.initialization-mode```
