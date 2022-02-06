@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import us.hyalen.springtemplate.core.Domain;
 
 import javax.annotation.PostConstruct;
-import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 
 @Component
