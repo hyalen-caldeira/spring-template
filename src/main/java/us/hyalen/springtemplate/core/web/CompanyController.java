@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import us.hyalen.springtemplate.core.ApiResponse;
 import us.hyalen.springtemplate.core.dto.CompanyDto;
+import us.hyalen.springtemplate.core.dto.ResponseDto;
 import us.hyalen.springtemplate.core.service.CompanyService;
 import us.hyalen.springtemplate.model.CompanyModel;
 
@@ -29,16 +30,17 @@ public class CompanyController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CompanyModel>> getAllCompanies() {
+    public ResponseEntity<ResponseDto<List<CompanyModel>>> getAllCompanies() {
         var list = service.getAllCompanies();
 
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        return ok(ResponseDto.forSuccess(list));
+        // return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{name}")
-    public ResponseEntity<CompanyDto> getCompanyByName(@PathVariable(value = "name") String name) {
+    public ResponseEntity<ResponseDto<CompanyDto>> getCompanyByName(@PathVariable(value = "name") String name) {
         CompanyDto companyDto = service.findByName(name);
-        return ok(companyDto);
+        return ok(ResponseDto.forSuccess(companyDto));
     }
 
     @PutMapping(value = "/{name}", consumes = CompanyDto.MEDIA_TYPE)
