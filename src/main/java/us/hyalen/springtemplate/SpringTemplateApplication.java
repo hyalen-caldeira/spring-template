@@ -11,5 +11,4 @@ public class SpringTemplateApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringTemplateApplication.class, args);
 	}
-
 }

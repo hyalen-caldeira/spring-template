@@ -47,6 +47,26 @@ import java.util.List;
  *     }]
  * }
  * </pre></p>
+ * <p>
+ * In certain scenarios, an operation may parially succeed and the consumer must still be responded with the details
+ * of the net outcome. In such cases, developers must set `status to `PARTIAL` indicating the partial success.
+ * When the `status` is set to `PARTIAL` developer must ensure that enough details are presented to the consumer
+ * on both what succeeded and failed.
+ * </p>
+ * <p><pre>
+ * {
+ *     "status" : "PARTIAL",
+ *     "data" : {
+ *         "id" : "001",
+ *         "ssn" : "xxx-xx-2121",
+ *         "email" : "abc@def.com"
+ *     },
+ *     "errors" : [{
+ *         "code" : "customer.001",
+ *         "message" : "Unable to update SSN number"
+ *     }]
+ * }
+ * </pre></p>
  */
 @Getter
 @Setter

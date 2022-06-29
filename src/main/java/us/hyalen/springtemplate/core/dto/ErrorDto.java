@@ -21,4 +21,10 @@ public class ErrorDto extends Dto {
     private String code;
     private String message;
     private String internalMessage;
+
+    public ErrorDto(String code, String message, String internalMessage) {
+        this.code = code;
+        this.message = message;
+        this.internalMessage = internalMessage;
+    }
 }

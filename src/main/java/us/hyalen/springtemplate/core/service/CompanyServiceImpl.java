@@ -2,6 +2,8 @@ package us.hyalen.springtemplate.core.service;
 
 import lombok.Setter;
 import org.springframework.stereotype.Service;
+import us.hyalen.springtemplate.core.BadResponseBodyException;
+import us.hyalen.springtemplate.core.ClientException;
 import us.hyalen.springtemplate.core.Domain;
 import us.hyalen.springtemplate.core.NotFoundException;
 import us.hyalen.springtemplate.core.dao.CompanyDao;
@@ -21,7 +23,8 @@ public class CompanyServiceImpl extends Domain implements CompanyService {
     // TODO
     @Override
     public List<CompanyModel> getAllCompanies() {
-        return (List<CompanyModel>) dao.findAll();
+        throw new BadResponseBodyException("I'm still here ...");
+//        return (List<CompanyModel>) dao.findAll();
     }
 
     @Override
