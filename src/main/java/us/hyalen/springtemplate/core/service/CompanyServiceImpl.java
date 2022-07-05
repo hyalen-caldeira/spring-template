@@ -23,8 +23,7 @@ public class CompanyServiceImpl extends Domain implements CompanyService {
     // TODO
     @Override
     public List<CompanyModel> getAllCompanies() {
-        throw new BadResponseBodyException("I'm still here ...");
-//        return (List<CompanyModel>) dao.findAll();
+        return (List<CompanyModel>) dao.findAll();
     }
 
     @Override

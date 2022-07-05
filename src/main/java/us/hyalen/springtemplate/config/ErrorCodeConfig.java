@@ -17,4 +17,8 @@ public class ErrorCodeConfig {
     private String badGatewayCode;
     private Integer badGatewayHttp;
     private String badGatewayMessage;
+
+    private String internalServerCode;
+    private Integer intervalServerHttp;
+    private String internalServerMessage;
 }
