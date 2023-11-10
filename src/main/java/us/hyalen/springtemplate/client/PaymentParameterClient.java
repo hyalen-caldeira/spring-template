@@ -6,7 +6,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import us.hyalen.springtemplate.client.response.paymentparameter.PaymentParameterInnerResponse;
+import us.hyalen.springtemplate.client.core.ClientResponseHandler;
+import us.hyalen.springtemplate.client.response.PaymentParameterInnerResponse;
 import us.hyalen.springtemplate.config.URIConfig;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import us.hyalen.springtemplate.core.dto.ResponseDto;
@@ -22,7 +23,7 @@ public class PaymentParameterClient {
 
     public PaymentParameterClient(
             URIConfig uriConfig,
-            @Qualifier("appRestTemplate") AppRestTemplate appRestTemplate,
+            @Qualifier("ppoRestTemplate") AppRestTemplate appRestTemplate,
             ClientResponseHandler clientResponseHandler) {
         this.uriConfig = uriConfig;
         this.appRestTemplate = appRestTemplate;

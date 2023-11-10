@@ -10,10 +10,15 @@ import us.hyalen.springtemplate.core.dto.ResponseDto;
 
 import java.net.URI;
 
-@AllArgsConstructor
+//@AllArgsConstructor
 public class AppRestTemplate {
     private RestTemplateRxWrapper restTemplateRxWrapper;
     private RestTemplateDelegate restTemplateDelegate;
+
+    public AppRestTemplate(RestTemplateDelegate restTemplateDelegate) {
+        this.restTemplateDelegate = restTemplateDelegate;
+        this.restTemplateRxWrapper = new RestTemplateRxWrapperImpl();
+    }
 
     public <T> Single<ResponseEntity<ResponseDto<T>>> exchange(
             URI url,

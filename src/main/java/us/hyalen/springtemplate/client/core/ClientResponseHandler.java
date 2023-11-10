@@ -1,4 +1,4 @@
-package us.hyalen.springtemplate.client;
+package us.hyalen.springtemplate.client.core;
 
 import ch.qos.logback.core.net.server.Client;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package us.hyalen.springtemplate.client.response.paymentparameter;
+package us.hyalen.springtemplate.client.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

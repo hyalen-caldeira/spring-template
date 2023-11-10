@@ -270,6 +270,7 @@ logging.level.org.hibernate: ERROR
 * GraphQL tips here ...
 ---
 ## TODO
+* Install Jacoco
 * Where to launch exception in case something goes wrong? Controller, service, DAO, ...?
 * Take a look on 2.11 as example to see how o use @Query annotation on Repositories
 * Swagger bean validation
